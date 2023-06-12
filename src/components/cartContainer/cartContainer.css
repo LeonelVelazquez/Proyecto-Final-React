@@ -1,0 +1,40 @@
+.cart-item {
+    margin:0px auto;
+    width: 400px;
+    height: 570px;
+    background-color: rgb(212, 241, 247);
+    margin-top: 40px;
+    border-radius: 20px;
+    padding: 50px, 0;
+    
+}
+
+.products-cart{
+    width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 50px 0;
+}
+
+.cart-item img {
+
+    border-radius: 20px;
+    width: 350px;
+    margin-top: 20px;
+    padding: 1px;
+
+}
+
+img:hover {
+    transform: scale(1.1);
+}
+
+.total-carrito{
+    margin-top: 5px;
+    margin: 0px auto;
+    width: 400px;
+    border-radius: 6px;
+    font-size: x-large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

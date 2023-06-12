@@ -1,0 +1,11 @@
+.nav-item{
+    font-size: 20px;
+    padding: 20px;
+    
+}
+.nav-item:hover{
+    background-color: whitesmoke;
+    border-radius: 6px;
+    
+}
+

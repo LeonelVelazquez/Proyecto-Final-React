@@ -1,0 +1,90 @@
+.card-detail_main {
+  width: 300px;
+  max-width: 300px;
+  height: auto;
+  background-color: rgb(212, 241, 247);
+  margin-top: 30px;
+  border-radius: 10px;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.card-detail_img img {
+  border-radius: 20px;
+  width: 200px;
+  margin-top: 20px;
+  max-width: 200px;
+  height: auto;
+  padding: 15px;
+}
+
+img:hover {
+  transform: scale(1.1);
+}
+
+.card-detail_buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: px;
+}
+
+.card-detail_buttons button {
+  border: none;
+  border-radius: 5px;
+  font-weight: 550;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.button-primary {
+  background-color: rgb(171, 221, 221);
+  color: #fff;
+}
+
+.button-primary:hover {
+  background-color: rgb(160, 236, 170);
+}
+
+.button-secondary {
+  background-color: rgb(243, 213, 79);
+  color: #fff;
+}
+
+.button-secondary:hover {
+  background-color: rgb(238, 137, 137);
+}
+
+.button-clear {
+  background-color: transparent;
+  color: rgb(171, 221, 221);
+  border: 1px solid rgb(171, 221, 221);
+}
+
+.button-clear:hover {
+  background-color: rgb(238, 137, 137);
+  color: #fff;
+}
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+  .card-detail_main {
+    max-width: 100%;
+  }
+
+  .card-detail_img img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-detail_buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-detail_buttons button {
+    margin: 5px 0;
+  }
+}
