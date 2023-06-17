@@ -9,8 +9,7 @@ import React from "react";
 import { userContext, UserContextProvider } from "./storage/userContext";
 import { CartContextProvider } from "./storage/cartContext";
 import CartContainer from "./components/cartContainer/CartContainer";
-import { getSingleItem, testApp } from "./services/firebase";
-import services from "./services/firebase"
+import { getSingleItem, testApp } from "./components/componentes/Productos";
 
 
 function App() {
