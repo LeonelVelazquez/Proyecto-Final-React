@@ -25,21 +25,4 @@
 .productos-card button:hover {
     background-color: #0062cc;
 }
-
-.filtro-precios {
-    margin-bottom: 20px;
-  }
-  
-  .filtro-precios label {
-    display: inline-block;
-    margin-right: 10px;
-    font-weight: bold;
-  }
-  
-  .filtro-precios select {
-    padding: 5px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
   

@@ -21,7 +21,9 @@ function App() {
       <div className="App">
         <BrowserRouter> 
           <Navbar/>
+          <Productos/>
           <Routes>
+            
             <Route path="/" element={<ItemListContainer /> } />
             <Route path="/category/:id" element={<ItemListContainer /> } />
             <Route path="/item/:itemid" element={<ItemDetailContainer /> } />
