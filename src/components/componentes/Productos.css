@@ -1,0 +1,45 @@
+.productos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.productos-card {
+    margin-top: 100px;
+    width: 300px;
+    border: 1px solid lightblue;
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.productos-card button {
+    background-color: aquamarine;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+.productos-card button:hover {
+    background-color: #0062cc;
+}
+
+.filtro-precios {
+    margin-bottom: 20px;
+  }
+  
+  .filtro-precios label {
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
+  .filtro-precios select {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  

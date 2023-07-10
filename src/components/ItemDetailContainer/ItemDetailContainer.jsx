@@ -1,7 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getSingleItem } from '../../services/mockAsyncService';
-import { getItems, getItemsPromise } from '../../services/firebase';
+//import { getItemsPromise } from '../../services/configs';
+import { getDoc, doc } from 'firebase/firestore';
+import { db } from '../../services/configs';
 import ItemListContainer from '../ItemListContainer/ItemListContainer';
 import ItemCount from '../ItemCount/ItemCount';
 import "./ItemDetail.css"
@@ -20,7 +22,7 @@ function ItemDetailContainer() {
       setIsInCart(true);
       alert(`Agregaste ${item.title} al carrito`);
       addItem(item, qty);
-      setStock(stock - qty); // Disminuye el stock en la cantidad seleccionada
+      setStock(prevStock => prevStock - qty); 
     } else {
       alert('No hay suficiente stock disponible');
     }
@@ -28,16 +30,22 @@ function ItemDetailContainer() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  getItems();
-
   useEffect(() => {
-    getSingleItem(itemid).then((respuesta) => {
-      setItem(respuesta);
-      setIsLoading(false);
-    });
+    const fetchItem = async () => {
+      try {
+        const respuesta = await getSingleItem(itemid);
+        setItem(respuesta);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error al obtener el detalle del artículo:', error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchItem();
   }, [itemid]);
 
-  // Al cargar la página, obtén el estado del stock guardado desde localStorage (si existe)
+  
   useEffect(() => {
     const savedStock = localStorage.getItem('stock');
     if (savedStock) {
@@ -45,7 +53,7 @@ function ItemDetailContainer() {
     }
   }, []);
 
-  // Guarda el estado del stock en localStorage cuando haya cambios
+  
   useEffect(() => {
     localStorage.setItem('stock', stock.toString());
   }, [stock]);

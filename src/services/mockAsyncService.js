@@ -9,6 +9,8 @@ const databaseItemes = [
         imgurl: "../assets/img/Bugs.png",
         category: "tazas",
         stock: 4
+        
+        
 
 
     },
