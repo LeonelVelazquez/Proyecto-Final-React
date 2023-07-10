@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getDoc, doc } from 'firebase/firestore';
-import { db } from '../../services/configs';
+import { doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { db } from "../../services/configs";
 import { CartContext } from '../../storage/cartContext';
 import Loader from '../Loader/Loader';
 import ItemCount from '../ItemCount/ItemCount';
@@ -12,42 +12,39 @@ function ItemDetailContainer() {
   const { itemid } = useParams();
   const { addItem, removeItem } = useContext(CartContext);
   const [isInCart, setIsInCart] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const onAdd = (qty) => {
+  const onAdd = async (qty) => {
     if (item.stock >= qty) {
       setIsInCart(true);
       alert(`Agregaste ${item.title} al carrito`);
       addItem(item, qty);
-      setItem((prevItem) => ({
-        ...prevItem,
-        stock: prevItem.stock - qty,
-      }));
+
+      const itemRef = doc(db, 'Productos', itemid);
+      await updateDoc(itemRef, {
+        stock: item.stock - qty,
+      });
     } else {
       alert('No hay suficiente stock disponible');
     }
   };
 
-  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const itemDoc = doc(db, 'Productos', itemid);
+    const unsubscribe = onSnapshot(itemDoc, (itemSnapshot) => {
+      if (itemSnapshot.exists()) {
+        setItem({ id: itemSnapshot.id, ...itemSnapshot.data() });
+      } else {
+        console.log('El artículo no existe');
+      }
+    });
+
+    return () => unsubscribe();
+  }, [itemid]);
 
   useEffect(() => {
-    const fetchItem = async () => {
-      try {
-        const itemDoc = doc(db, 'Productos', itemid);
-        const itemSnapshot = await getDoc(itemDoc);
-        if (itemSnapshot.exists()) {
-          setItem({ id: itemSnapshot.id, ...itemSnapshot.data() });
-        } else {
-          console.log('El artículo no existe');
-        }
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error al obtener el detalle del artículo:', error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchItem();
-  }, [itemid]);
+    setIsLoading(false);
+  }, [item]);
 
   if (isLoading) {
     return <center><Loader /></center>;

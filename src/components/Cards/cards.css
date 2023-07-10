@@ -40,14 +40,14 @@
   }
   
   .favorite-button {
-    margin-left: 20px;
-    height: 40px;
+    margin: 20px;
+    height: 30px;
     width: 40px;
     border: none;
     border-radius: 50%;
     background-color: transparent;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 25px;
     
   }
   

@@ -12,6 +12,7 @@ import CartContainer from "./components/cartContainer/CartContainer";
 import { getSingleItem, testApp } from "./components/componentes/Productos";
 import Productos from "./components/componentes/Productos";
 import ItemCount from "./components/ItemCount/ItemCount";
+import Checkout from "./components/Formulario/Checkout";
 
 
 function App() {
