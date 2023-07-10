@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import ItemDetailContainer from '../ItemDetailContainer/ItemDetailContainer';
 import '../ItemCount/ItemCount.css'
+import Productos from '../componentes/Productos';
 import { CartContext } from '../../storage/cartContext'
 import ItemList from '../ItemList/ItemList';
 const ItemCount = ({ onAdd, initial, stock }) => {

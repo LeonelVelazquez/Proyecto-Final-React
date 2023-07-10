@@ -4,22 +4,24 @@ import { getDoc, doc } from 'firebase/firestore';
 import { db } from '../../services/configs';
 import { CartContext } from '../../storage/cartContext';
 import Loader from '../Loader/Loader';
-import ItemCount from "../ItemCount/ItemCount"
-import "./ItemDetail.css"
+import ItemCount from '../ItemCount/ItemCount';
+import './ItemDetail.css';
 
 function ItemDetailContainer() {
   const [item, setItem] = useState({});
-  const [stock, setStock] = useState(0);
   const { itemid } = useParams();
-  const { cart, addItem, removeItem } = useContext(CartContext);
+  const { addItem, removeItem } = useContext(CartContext);
   const [isInCart, setIsInCart] = useState(false);
 
   const onAdd = (qty) => {
-    if (stock >= qty) {
+    if (item.stock >= qty) {
       setIsInCart(true);
       alert(`Agregaste ${item.title} al carrito`);
       addItem(item, qty);
-      setStock(prevStock => prevStock - qty); 
+      setItem((prevItem) => ({
+        ...prevItem,
+        stock: prevItem.stock - qty,
+      }));
     } else {
       alert('No hay suficiente stock disponible');
     }
@@ -47,17 +49,6 @@ function ItemDetailContainer() {
     fetchItem();
   }, [itemid]);
 
-  useEffect(() => {
-    const savedStock = localStorage.getItem('stock');
-    if (savedStock) {
-      setStock(parseInt(savedStock));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('stock', stock.toString());
-  }, [stock]);
-
   if (isLoading) {
     return <center><Loader /></center>;
   }
@@ -75,8 +66,8 @@ function ItemDetailContainer() {
           <br />
           <small>{item.detail}</small>
           <br />
-          <small><strong>stock: {stock}</strong></small>
-          <small><ItemCount onAdd={onAdd} initial={1} stock={stock} /></small>
+          <p>stock: {item.stock}</p>
+          <small><ItemCount onAdd={onAdd} initial={1} stock={item.stock} /></small>
           <small><button className='button-primary_remove' onClick={() => removeItem(item.id)}>Eliminar</button></small>
           <br />
           <Link to="/cart">

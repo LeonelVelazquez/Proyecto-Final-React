@@ -11,6 +11,7 @@ import { CartContextProvider } from "./storage/cartContext";
 import CartContainer from "./components/cartContainer/CartContainer";
 import { getSingleItem, testApp } from "./components/componentes/Productos";
 import Productos from "./components/componentes/Productos";
+import ItemCount from "./components/ItemCount/ItemCount";
 
 
 function App() {
@@ -21,9 +22,8 @@ function App() {
       <div className="App">
         <BrowserRouter> 
           <Navbar/>
-          <Productos/>
+          
           <Routes>
-            
             <Route path="/" element={<ItemListContainer /> } />
             <Route path="/category/:id" element={<ItemListContainer /> } />
             <Route path="/item/:itemid" element={<ItemDetailContainer /> } />
