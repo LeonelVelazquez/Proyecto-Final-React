@@ -2,8 +2,8 @@ import { useState, useContext } from "react";
 import { db } from "../../services/configs";
 import { collection, addDoc } from "firebase/firestore";
 import ItemList from "../ItemList/ItemList";
-import { CartContext } from "../../storage/cartContext";
 import "./Checkout.css";
+import { CartContext } from "../../storage/cartContext";
 
 const Checkout = () => {
   const { carrito, vaciarCarrito } = useContext(CartContext);
@@ -53,11 +53,11 @@ const Checkout = () => {
   };
 
   return (
-    <div>
+    <div className="checkout-container">
       <h2>Checkout</h2>
       <form onSubmit={manejadorFormulario}>
-        {carrito.map((productos) => (
-          <div key={productos.item.id}>
+        {carrito && carrito.map((productos) => (
+          <div key={productos.item.id} className="checkout-item">
             <p>
               {productos.item.nombre} x {productos.cantidad}
             </p>
@@ -68,7 +68,7 @@ const Checkout = () => {
 
         <hr />
 
-        <div>
+        <div className="checkout-form-field">
           <label htmlFor="nombre">Nombre</label>
           <input
             type="text"
@@ -78,7 +78,7 @@ const Checkout = () => {
           />
         </div>
 
-        <div>
+        <div className="checkout-form-field">
           <label htmlFor="apellido">Apellido</label>
           <input
             type="text"
@@ -88,7 +88,7 @@ const Checkout = () => {
           />
         </div>
 
-        <div>
+        <div className="checkout-form-field">
           <label htmlFor="telefono">Teléfono</label>
           <input
             type="text"
@@ -98,7 +98,7 @@ const Checkout = () => {
           />
         </div>
 
-        <div>
+        <div className="checkout-form-field">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -108,7 +108,7 @@ const Checkout = () => {
           />
         </div>
 
-        <div>
+        <div className="checkout-form-field">
           <label htmlFor="emailConfirmacion">Confirmar Email</label>
           <input
             type="email"
@@ -118,12 +118,12 @@ const Checkout = () => {
           />
         </div>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type="submit">Finalizar Compra</button>
+        {error && <p className="checkout-error">{error}</p>}
+        <button type="submit" className="checkout-button">Finalizar Compra</button>
       </form>
 
       {ordenId && (
-        <strong>
+        <strong className="checkout-success">
           ¡Gracias por tu compra! Tu número de orden es {ordenId}
         </strong>
       )}
