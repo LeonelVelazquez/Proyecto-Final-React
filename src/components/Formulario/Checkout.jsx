@@ -13,8 +13,7 @@ const Checkout = () => {
   const [emailConfirmacion, setEmailConfirmacion] = useState("");
   const [error, setError] = useState("");
   const [ordenId, setOrdenId] = useState("");
-
-  console.log(cart);
+  const [productosOrden, setProductosOrden] = useState([]);
 
   const manejadorFormulario = async (event) => {
     event.preventDefault();
@@ -27,13 +26,6 @@ const Checkout = () => {
       return;
     }
 
-    const productosOrden = cart.map((producto) => ({
-      id: producto.id,
-      nombre: producto.nombre,
-      precio: producto.precio,
-      cantidad: producto.cantidad,
-    }));
-
     const pedido = {
       cliente: {
         nombre,
@@ -42,25 +34,26 @@ const Checkout = () => {
         email,
         emailConfirmacion,
       },
-      productos: productosOrden,
+      productos: cart,
     };
 
-    addDoc(collection(db, "orders"), pedido)
-      .then((docRef) => {
-        const orderId = docRef.id;
-        alert(orderId);
-        clearCart();
-        setNombre("");
-        setEmail("");
-        setTelefono("");
-        setOrdenId(orderId);
-      })
-      .catch((error) => {
-        console.error("Error al guardar la orden:", error);
-      });
-  };
+    try {
+      const docRef = await addDoc(collection(db, "orders"), pedido);
+      const orderId = docRef.id;
+      alert(orderId);
+      clearCart();
+      setNombre("");
+      setEmail("");
+      setTelefono("");
+      setOrdenId(orderId);
+      setError("");
 
-  console.log("ordenId:", ordenId);
+      setProductosOrden([...cart]); 
+
+    } catch (error) {
+      console.error("Error al guardar la orden:", error);
+    }
+  };
 
   return (
     <div className="checkout-container">
@@ -131,8 +124,10 @@ const Checkout = () => {
           </strong>
           <h3>Productos en tu orden:</h3>
           <ul>
-            {cart.map((producto) => (
-              <li key={producto.id}>{producto.nombre}</li>
+            {productosOrden.map((producto) => (
+              <li key={producto.id}>
+                {producto.title} x {producto.cantidad}
+              </li>
             ))}
           </ul>
         </div>

@@ -9,6 +9,9 @@
   align-items: center;
 }
 
+.ul {
+  list-style: none;
+}
 .checkout-item {
   margin-bottom: 10px;
 }
