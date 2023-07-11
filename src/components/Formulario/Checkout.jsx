@@ -1,12 +1,11 @@
 import { useState, useContext } from "react";
 import { db } from "../../services/configs";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import ItemList from "../ItemList/ItemList";
 import "./Checkout.css";
 import { CartContext } from "../../storage/cartContext";
 
 const Checkout = () => {
-  const { carrito, vaciarCarrito } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -14,6 +13,8 @@ const Checkout = () => {
   const [emailConfirmacion, setEmailConfirmacion] = useState("");
   const [error, setError] = useState("");
   const [ordenId, setOrdenId] = useState("");
+
+  console.log(cart)
 
   const manejadorFormulario = async (event) => {
     event.preventDefault();
@@ -26,32 +27,29 @@ const Checkout = () => {
       return;
     }
 
-    const orden = {
-      items: carrito.map((productos) => ({
-        id: productos.item.id,
-        nombre: productos.item.nombre,
-        cantidad: productos.cantidad
-      })),
-      total: carrito.reduce(
-        (total, productos) =>
-          total + productos.item.price * productos.cantidad,
-        0
-      ),
-      nombre,
-      apellido,
-      telefono,
-      email,
-      fecha: serverTimestamp()
+    const pedido = {
+      cliente: {
+        nombre,
+        apellido,
+        telefono,
+        email,
+        emailConfirmacion
+      },
+      productos: cart
     };
 
-    try {
-      const docRef = await addDoc(collection(db, "compradores"), orden);
-      console.log("ID de comprador:", docRef.id);
-      setOrdenId(docRef.id);
-      vaciarCarrito();
-    } catch (error) {
-      setError("Se produjo un error al crear la orden. Vuelva pronto");
-    }
+    addDoc(collection(db, 'orders'), pedido)
+      .then((docRef) => {
+        const orderId = docRef.id;
+        alert(orderId)
+        clearCart();
+        setNombre('');
+        setEmail('');
+        setTelefono('');
+      })
+      .catch((error) => {
+        console.error('Error al guardar la orden:', error);
+      });
   };
 
   console.log("ordenId:", ordenId);
@@ -60,15 +58,6 @@ const Checkout = () => {
     <div className="checkout-container">
       <h2>Checkout</h2>
       <form onSubmit={manejadorFormulario}>
-        {carrito && carrito.map((productos) => (
-          <div key={productos.item.id} className="checkout-item">
-            <p>
-              {productos.item.nombre} x {productos.cantidad}
-            </p>
-            <p>Price $: {productos.item.price}</p>
-            <hr />
-          </div>
-        ))}
 
         <hr />
 

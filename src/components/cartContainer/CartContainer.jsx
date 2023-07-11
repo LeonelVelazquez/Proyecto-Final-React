@@ -26,9 +26,7 @@ function CartContainer() {
       total: getTotalPriceInCart()
     };
 
-    // Realizar acciones con la orden (por ejemplo, enviarla a Firebase)
 
-    console.log(order);
   }
 
   return (
