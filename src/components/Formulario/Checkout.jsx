@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { db } from "../../services/configs";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import ItemList from "../ItemList/ItemList";
 import "./Checkout.css";
 import { CartContext } from "../../storage/cartContext";
@@ -15,7 +15,8 @@ const Checkout = () => {
   const [error, setError] = useState("");
   const [ordenId, setOrdenId] = useState("");
 
-  const manejadorFormulario = () => {
+  const manejadorFormulario = async (event) => {
+    event.preventDefault();
     if (!nombre || !apellido || !telefono || !email || !emailConfirmacion) {
       setError("Por favor complete todos los campos");
       return;
@@ -39,18 +40,21 @@ const Checkout = () => {
       nombre,
       apellido,
       telefono,
-      email
+      email,
+      fecha: serverTimestamp()
     };
 
-    addDoc(collection(db, "ordenes"), orden)
-      .then((docRef) => {
-        setOrdenId(docRef.id);
-        vaciarCarrito();
-      })
-      .catch((error) => {
-        setError("Se produjo un error al crear la orden. Vuelva pronto");
-      });
+    try {
+      const docRef = await addDoc(collection(db, "compradores"), orden);
+      console.log("ID de comprador:", docRef.id);
+      setOrdenId(docRef.id);
+      vaciarCarrito();
+    } catch (error) {
+      setError("Se produjo un error al crear la orden. Vuelva pronto");
+    }
   };
+
+  console.log("ordenId:", ordenId);
 
   return (
     <div className="checkout-container">
