@@ -1,21 +1,16 @@
-import React from 'react';
-import { useState } from 'react';
-import ItemDetailContainer from '../ItemDetailContainer/ItemDetailContainer';
-import '../ItemCount/ItemCount.css'
-import Productos from '../componentes/Productos';
-import { CartContext } from '../../storage/cartContext'
-import ItemList from '../ItemList/ItemList';
+import React from "react";
+import { useState } from "react";
+import ItemDetailContainer from "../ItemDetailContainer/ItemDetailContainer";
+import "../ItemCount/ItemCount.css";
+import Productos from "../componentes/Productos";
+import { CartContext } from "../../storage/cartContext";
+import ItemList from "../ItemList/ItemList";
 const ItemCount = ({ onAdd, initial, stock }) => {
-  
   const [qty, setQty] = useState(initial);
 
-  
   const addProduct = (num) => {
     setQty(qty + num);
   };
-
-  
-  
 
   return (
     <div className="count-container">
@@ -23,7 +18,6 @@ const ItemCount = ({ onAdd, initial, stock }) => {
         <button
           className="count-container__button"
           onClick={() => addProduct(-1)}
-
           disabled={qty === initial}
         >
           -
@@ -32,7 +26,6 @@ const ItemCount = ({ onAdd, initial, stock }) => {
         <button
           className="count-container__button"
           onClick={() => addProduct(+1)}
-          
           disabled={qty === stock}
         >
           +
@@ -47,7 +40,6 @@ const ItemCount = ({ onAdd, initial, stock }) => {
         disabled={stock === 0 ? true : null}
       >
         Agregar al carrito
-        
       </button>
     </div>
   );

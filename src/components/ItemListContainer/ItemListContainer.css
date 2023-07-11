@@ -1,17 +1,16 @@
 .item-list-container {
-    margin: 20px;
-  }
-  
-  .price-filter {
-    margin-bottom: 10px;
-  }
-  
-  .price-filter label {
-    margin-right: 10px;
-  }
-  
-  .price-filter select {
-    padding: 5px;
-    font-size: 14px;
-  }
-  
+  margin: 20px;
+}
+
+.price-filter {
+  margin-bottom: 10px;
+}
+
+.price-filter label {
+  margin-right: 10px;
+}
+
+.price-filter select {
+  padding: 5px;
+  font-size: 14px;
+}

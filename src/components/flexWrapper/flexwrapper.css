@@ -10,7 +10,6 @@
   background-color: rgb(212, 241, 247);
   margin-top: 40px;
   border-radius: 20px;
-
 }
 
 .tarjetas img {
@@ -18,12 +17,8 @@
   margin: 15px;
   margin-bottom: 20px;
   padding: 5px;
-
-
-
 }
 
 img:hover {
-
   transform: scale(1.1);
 }

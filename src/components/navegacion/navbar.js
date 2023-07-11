@@ -58,16 +58,6 @@ function Navbar() {
             </li>
           </ul>
 
-          <form onSubmit={handleSubmit}>
-            <label>
-              Ingrese usuario:
-              <input name="username" placeholder="username" />
-            </label>
-            <button className="btn btn-outline-success" type="submit">
-              Login
-            </button>
-          </form>
-
           <Link to="/cart" className="navbar-brand">
             <span role="img" aria-label="Cart">
               🛒

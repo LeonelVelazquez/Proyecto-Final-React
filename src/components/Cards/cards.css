@@ -1,69 +1,66 @@
 .tarjetas {
-    width: 300px;
-    margin: 10px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    
-  }
-  
-  .card-image {
-    height: 200px;
-    overflow: hidden;
-  }
-  
-  .image {
-   height: 200px;
-    object-fit: cover;
-  }
-  
-  .card-content {
-    padding: 20px;
-  }
-  
-  .title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .price {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-  
-  .detail {
-    font-size: 14px;
-    color: #888888;
-    margin-bottom: 10px;
-  }
-  
-  .favorite-button {
-    margin: 20px;
-    height: 30px;
-    width: 40px;
-    border: none;
-    border-radius: 50%;
-    background-color: transparent;
-    cursor: pointer;
-    font-size: 25px;
-    
-  }
-  
-  .favorite-button:focus {
-    outline: none;
-  }
-  
-  .favorite {
-    background-color: #3db7fd;
-    background-image: linear-gradient(160deg, #42b4f7 0%, #80d0c7 100%);
-    color: #ffffff;
-  }
-  
-  .link-button {
-    display: flex;
-    justify-content: center;
-    margin-top: auto;
-  }
-  
+  width: 300px;
+  margin: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+}
+
+.card-image {
+  height: 200px;
+  overflow: hidden;
+}
+
+.image {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.detail {
+  font-size: 14px;
+  color: #888888;
+  margin-bottom: 10px;
+}
+
+.favorite-button {
+  margin: 20px;
+  height: 30px;
+  width: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.favorite-button:focus {
+  outline: none;
+}
+
+.favorite {
+  background-color: #3db7fd;
+  background-image: linear-gradient(160deg, #42b4f7 0%, #80d0c7 100%);
+  color: #ffffff;
+}
+
+.link-button {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+}

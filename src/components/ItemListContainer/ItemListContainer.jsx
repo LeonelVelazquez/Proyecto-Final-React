@@ -4,13 +4,13 @@ import { db } from "../../services/configs";
 import ItemList from "../ItemList/ItemList";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader/Loader";
-import "../ItemListContainer/ItemListContainer.css"
+import "../ItemListContainer/ItemListContainer.css";
 
 function ItemListContainer() {
   const [items, setItems] = useState([]);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const [priceRange, setPriceRange] = useState('');
+  const [priceRange, setPriceRange] = useState("");
 
   useEffect(() => {
     const obtenerProductos = async () => {
@@ -38,10 +38,10 @@ function ItemListContainer() {
   };
 
   const filteredItems = items.filter((item) => {
-    if (priceRange === 'all') {
+    if (priceRange === "all") {
       return true;
     }
-    const [min, max] = priceRange.split('-');
+    const [min, max] = priceRange.split("-");
     const price = parseFloat(item.price);
     return price >= parseFloat(min) && price <= parseFloat(max);
   });
@@ -53,13 +53,12 @@ function ItemListContainer() {
   return (
     <div>
       <div className="price-filter">
-        <label htmlFor="priceRange">Filtro de Precios: </label>
+        <label htmlFor="priceRange">Filtro de Precios:</label>
         <select id="priceRange" value={priceRange} onChange={handleFilter}>
           <option value="all">TODOS</option>
           <option value="1000-2000">$1000 - $2000</option>
           <option value="3000-4000">$3000 - $4000</option>
-          <option value="4000-6000">$4000 - $5000</option>
-          
+          <option value="4000-5000">$4000 - $5000</option>
         </select>
       </div>
 
@@ -69,5 +68,3 @@ function ItemListContainer() {
 }
 
 export default ItemListContainer;
-
- 

@@ -14,7 +14,7 @@ const Checkout = () => {
   const [error, setError] = useState("");
   const [ordenId, setOrdenId] = useState("");
 
-  console.log(cart)
+  console.log(cart);
 
   const manejadorFormulario = async (event) => {
     event.preventDefault();
@@ -27,28 +27,36 @@ const Checkout = () => {
       return;
     }
 
+    const productosOrden = cart.map((producto) => ({
+      id: producto.id,
+      nombre: producto.nombre,
+      precio: producto.precio,
+      cantidad: producto.cantidad,
+    }));
+
     const pedido = {
       cliente: {
         nombre,
         apellido,
         telefono,
         email,
-        emailConfirmacion
+        emailConfirmacion,
       },
-      productos: cart
+      productos: productosOrden,
     };
 
-    addDoc(collection(db, 'orders'), pedido)
+    addDoc(collection(db, "orders"), pedido)
       .then((docRef) => {
         const orderId = docRef.id;
-        alert(orderId)
+        alert(orderId);
         clearCart();
-        setNombre('');
-        setEmail('');
-        setTelefono('');
+        setNombre("");
+        setEmail("");
+        setTelefono("");
+        setOrdenId(orderId);
       })
       .catch((error) => {
-        console.error('Error al guardar la orden:', error);
+        console.error("Error al guardar la orden:", error);
       });
   };
 
@@ -58,7 +66,6 @@ const Checkout = () => {
     <div className="checkout-container">
       <h2>Checkout</h2>
       <form onSubmit={manejadorFormulario}>
-
         <hr />
 
         <div className="checkout-form-field">
@@ -112,13 +119,23 @@ const Checkout = () => {
         </div>
 
         {error && <p className="checkout-error">{error}</p>}
-        <button type="submit" className="checkout-button">Finalizar Compra</button>
+        <button type="submit" className="checkout-button">
+          Finalizar Compra
+        </button>
       </form>
 
       {ordenId && (
-        <strong className="checkout-success">
-          ¡Gracias por tu compra! Tu número de orden es {ordenId}
-        </strong>
+        <div>
+          <strong className="checkout-success">
+            ¡Gracias por tu compra! Tu número de orden es {ordenId}
+          </strong>
+          <h3>Productos en tu orden:</h3>
+          <ul>
+            {cart.map((producto) => (
+              <li key={producto.id}>{producto.nombre}</li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

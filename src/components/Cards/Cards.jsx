@@ -36,7 +36,7 @@ function Cards(props) {
             <Button text={"Ver mas"} />
           </Link>
           <button className="favorite-button" onClick={handleFavoriteClick}>
-          {isFavorite ? "❤️" : "🤍"}
+            {isFavorite ? "❤️" : "🤍"}
           </button>
         </center>
       </div>

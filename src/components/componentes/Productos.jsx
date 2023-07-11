@@ -4,15 +4,13 @@ import { collection, query, getDocs, where } from "firebase/firestore";
 import { db } from "../../services/configs";
 import ItemDetailContainer from "../ItemDetailContainer/ItemDetailContainer";
 
-import "../../components/componentes/Productos.css"
+import "../../components/componentes/Productos.css";
 
 const Productos = () => {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
     const obtenerProductos = async () => {
-
-      
       const querySnapshot = await getDocs(query(collection(db, "Productos")));
       const datosProductos = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -42,4 +40,3 @@ const Productos = () => {
 };
 
 export default Productos;
-
